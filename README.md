@@ -1,1 +1,63 @@
-# todo-api-backend
+# To-Do API REST - Prueba Técnica Backend
+
+API REST construida con Node.js y Express para la gestión de tareas.
+
+---
+
+## Decisiones Técnicas
+
+- **Estructura del Proyecto:** Se optó por una arquitectura limpia dividida en Rutas (`routes`) y Controladores (`controllers`), garantizando la separación de responsabilidades y un código legible.
+- **Persistencia:** Siguiendo los criterios de aceptación de la prueba, los datos se almacenan de forma volátil en memoria utilizando un arreglo nativo de JavaScript.
+- **Variables de Entorno:** Integración de `.env` empleando la librería `dotenv` para modularizar configuraciones del sistema (como el puerto de escucha) sin exponer datos sensibles.
+- **Manejo de Errores:** Implementación de códigos de estado HTTP semánticos (400 para peticiones inválidas y 404 para recursos no encontrados) con respuestas claras en formato JSON.
+
+---
+
+## Instalación y Ejecución
+
+Sigue estos pasos para clonar, instalar y desplegar el proyecto localmente:
+
+### 1. Clonar el repositorio
+```bash
+git clone <URL_DE_TU_REPOSITORIO>
+cd todo-api-backend
+```
+
+### 2. Instalar dependencias
+Asegúrate de tener Node.js instalado y ejecuta:
+```bash
+npm install
+```
+
+### 3. Configurar variables de entorno
+Crea un archivo `.env` en la raíz del proyecto y define el puerto de escucha:
+```env
+PORT=3000
+```
+
+### 4. Ejecución del Servidor
+En modo de desarrollo (con autorecarga usando Nodemon):
+```bash
+npm run dev
+```
+
+En modo de producción:
+```bash
+npm start
+```
+
+El servidor estará escuchando en el puerto configurado (ej: http://localhost:3000).
+
+---
+
+## Endpoints Disponibles
+
+Todos los endpoints de la API tienen el prefijo `/api`.
+
+| Método | Endpoint | Descripción | Body / Query Params |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/api/tasks` | Obtiene la lista de todas las tareas. Permite filtrar por estado. | **Query Params:**<br>`completed` (booleano, opcional) |
+| `GET` | `/api/tasks/:id` | Obtiene los detalles de una tarea específica por su ID. | *Ninguno* |
+| `POST` | `/api/tasks` | Crea una nueva tarea. | **Body (JSON):**<br>`title` (obligatorio, string)<br>`description` (opcional, string) |
+| `PUT` | `/api/tasks/:id` | Actualiza el estado (`completed`) de una tarea por su ID. | **Body (JSON):**<br>`completed` (obligatorio, booleano) |
+| `DELETE` | `/api/tasks/:id` | Elimina una tarea por su ID. | *Ninguno* |
