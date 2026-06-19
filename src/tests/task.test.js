@@ -6,6 +6,7 @@ describe('Pruebas para la API de Tareas (To-Do API)', () => {
     it('should create a new task successfully', async () => {
         const response = await request(app)
             .post('/api/tasks')
+            .set('x-api-key', process.env.API_KEY)
             .send({
                 title: 'Comprar leche',
                 description: 'Ir al super'
@@ -30,6 +31,7 @@ describe('Pruebas para la API de Tareas (To-Do API)', () => {
     it('should return 400 if title is missing', async () => {
         const response = await request(app)
             .post('/api/tasks')
+            .set('x-api-key', process.env.API_KEY)
             .send({
                 description: 'Sin título'
             });
@@ -46,10 +48,35 @@ describe('Pruebas para la API de Tareas (To-Do API)', () => {
         expect(response.body).toHaveProperty('error');
     });
 
+    // Tests para autenticación (API Key)
+    it('should return 401 if API Key is missing', async () => {
+        const response = await request(app)
+            .post('/api/tasks')
+            .send({
+                title: 'Tarea no autorizada'
+            });
+
+        expect(response.statusCode).toBe(401);
+        expect(response.body).toHaveProperty('error');
+    });
+
+    it('should return 401 if API Key is invalid', async () => {
+        const response = await request(app)
+            .post('/api/tasks')
+            .set('x-api-key', 'invalid_key_123')
+            .send({
+                title: 'Tarea con llave incorrecta'
+            });
+
+        expect(response.statusCode).toBe(401);
+        expect(response.body).toHaveProperty('error');
+    });
+
     it('should update a task status to completed', async () => {
         const taskId = 1;
         const response = await request(app)
             .put(`/api/tasks/${taskId}`)
+            .set('x-api-key', process.env.API_KEY)
             .send({ completed: true });
 
         expect(response.statusCode).toBe(200);
@@ -58,7 +85,9 @@ describe('Pruebas para la API de Tareas (To-Do API)', () => {
 
     it('should delete a task', async () => {
         const taskId = 1;
-        const response = await request(app).delete(`/api/tasks/${taskId}`);
+        const response = await request(app)
+            .delete(`/api/tasks/${taskId}`)
+            .set('x-api-key', process.env.API_KEY);
 
         expect(response.statusCode).toBe(204);
     });
