@@ -19,7 +19,7 @@ Sigue estos pasos para clonar, instalar y desplegar el proyecto localmente:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone <URL_DE_TU_REPOSITORIO>
+git clone https://github.com/AlejandroMendozaP/todo-api-backend.git
 cd todo-api-backend
 ```
 
