@@ -35,7 +35,7 @@ describe('Pruebas para la API de Tareas (To-Do API)', () => {
             });
 
         expect(response.statusCode).toBe(400);
-        expect(response.body).toHaveProperty('error');
+        expect(response.body).toHaveProperty('errors');
     });
 
     // Test para GET /tasks/{id} - Caso No Encontrado (404)

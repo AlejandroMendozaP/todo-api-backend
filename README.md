@@ -11,7 +11,7 @@ API REST construida con Node.js y Express para la gestión de tareas.
 - **Variables de Entorno:** Integración de `.env` empleando la librería `dotenv` para modularizar configuraciones del sistema (como el puerto de escucha) sin exponer datos sensibles.
 - **Manejo de Errores:** Implementación de códigos de estado HTTP semánticos (400 para peticiones inválidas y 404 para recursos no encontrados) con respuestas claras en formato JSON.
 - **Pruebas Automatizadas:** Integración de `jest` y `supertest` para validar el comportamiento del CRUD y el control de errores de los endpoints en un entorno controlado.
-
+- **Validación de Peticiones:** Integración de `express-validator` para validar las peticiones que llegan al servidor y asegurar que los datos sean correctos.
 ---
 
 ## Instalación y Ejecución

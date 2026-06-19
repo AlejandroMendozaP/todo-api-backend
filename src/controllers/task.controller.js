@@ -4,10 +4,6 @@ let nextId = 1;
 const createTask = (req, res) => {
     const { title, description } = req.body;
 
-    if (!title) {
-        return res.status(400).json({ error: "El campo 'title' es obligatorio." });
-    }
-
     const newTask = {
         id: String(nextId++),
         title,
@@ -48,10 +44,6 @@ const getTaskById = (req, res) => {
 const updateTask = (req, res) => {
     const { id } = req.params;
     const { completed } = req.body;
-
-    if (completed === undefined || typeof completed !== 'boolean') {
-        return res.status(400).json({ error: "El campo 'completed' debe ser un valor booleano." });
-    }
 
     const taskIndex = tasks.findIndex(t => t.id === id);
 
