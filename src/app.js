@@ -16,3 +16,5 @@ app.use((req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor corriendo exitosamente en el puerto ${PORT}`);
 });
+
+module.exports = app;
